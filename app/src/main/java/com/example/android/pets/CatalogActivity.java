@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.android.pets.data.PetContract.PetEntry;
 import com.example.android.pets.data.PetDbHelper;
+import com.example.android.pets.data.PetProvider;
 
 /**
  * Displays list of pets that were entered and stored in the app.
@@ -63,7 +64,7 @@ public class CatalogActivity extends AppCompatActivity {
 
 
         // Create and/or open a database to read from it
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        //SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         // Perform this raw SQL query "SELECT * FROM pets"
         // to get a Cursor that contains all rows from the pets table.
@@ -78,8 +79,8 @@ public class CatalogActivity extends AppCompatActivity {
                 PetEntry.COLUMN_WEIGHT
         };
 
-        Cursor cursor = db.query(PetEntry.TABLE_NAME, projection, null, null,
-                null, null, null);
+        Cursor cursor = getContentResolver().query(PetEntry.CONTENT_URI, projection, null, null,
+                null);
 
         TextView displayView = (TextView) findViewById(R.id.text_view_pet);
 
