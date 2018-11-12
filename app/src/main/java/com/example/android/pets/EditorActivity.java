@@ -16,12 +16,11 @@
 package com.example.android.pets;
 
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,25 +30,31 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.android.pets.data.PetContract;
 import com.example.android.pets.data.PetContract.PetEntry;
-import com.example.android.pets.data.PetDbHelper;
 
 /**
  * Allows user to create a new pet or edit an existing one.
  */
 public class EditorActivity extends AppCompatActivity {
 
-    /** EditText field to enter the pet's name */
+    /**
+     * EditText field to enter the pet's name
+     */
     private EditText mNameEditText;
 
-    /** EditText field to enter the pet's breed */
+    /**
+     * EditText field to enter the pet's breed
+     */
     private EditText mBreedEditText;
 
-    /** EditText field to enter the pet's weight */
+    /**
+     * EditText field to enter the pet's weight
+     */
     private EditText mWeightEditText;
 
-    /** EditText field to enter the pet's gender */
+    /**
+     * EditText field to enter the pet's gender
+     */
     private Spinner mGenderSpinner;
 
     /**
@@ -111,14 +116,15 @@ public class EditorActivity extends AppCompatActivity {
         });
     }
 
-    private void insertPet(){
+    private void insertPet() {
 
         String nameEntry = mNameEditText.getText().toString().trim();
         String breedEntry = mBreedEditText.getText().toString().trim();
         int weightEntry = Integer.parseInt(mWeightEditText.getText().toString().trim());
 
-        PetDbHelper mDbHelper = new PetDbHelper(this);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        //old code now not needed, left for info
+//        PetDbHelper mDbHelper = new PetDbHelper(this);
+//        SQLiteDatabase db = mDbHelper.getWritableDatabase();
         ContentValues petValues = new ContentValues();
 
         petValues.put(PetEntry.COLUMN_NAME, nameEntry);
@@ -126,12 +132,16 @@ public class EditorActivity extends AppCompatActivity {
         petValues.put(PetEntry.COLUMN_GENDER, mGender);
         petValues.put(PetEntry.COLUMN_WEIGHT, weightEntry);
 
-        long newEntry = db.insert(PetEntry.TABLE_NAME, null, petValues);
-        Log.v("Catalog Activity", " - new entry num: " + newEntry);
+        //insert pet into petProvider and return the content URI of the new entry
+        Uri newEntry = getContentResolver().insert(PetEntry.CONTENT_URI, petValues);
+
 
         String message;
-        if (newEntry == -1){message = "error saving";}
-        else{message = "pet saved at " + newEntry;};
+        if (newEntry == null) {
+            message = getString(R.string.toast_pet_save_error);
+        } else {
+            message = getString(R.string.toast_pet_saved);
+        }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
     }

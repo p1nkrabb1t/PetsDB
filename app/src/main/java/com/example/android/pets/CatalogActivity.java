@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -137,7 +138,7 @@ public class CatalogActivity extends AppCompatActivity {
     }
 
     private void insertPet(){
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        //SQLiteDatabase db = mDbHelper.getWritableDatabase();
         ContentValues petValues = new ContentValues();
 
         petValues.put(PetEntry.COLUMN_NAME, "Toto");
@@ -145,7 +146,9 @@ public class CatalogActivity extends AppCompatActivity {
         petValues.put(PetEntry.COLUMN_GENDER, PetEntry.GENDER_MALE);
         petValues.put(PetEntry.COLUMN_WEIGHT, 7);
 
-        long newEntry = db.insert(PetEntry.TABLE_NAME, null, petValues);
+        Uri newEntry = getContentResolver().insert(PetEntry.CONTENT_URI, petValues);
+
+        //long newEntry = db.insert(PetEntry.TABLE_NAME, null, petValues);
         Log.v("Catalog Activity", " - new entry num: " + newEntry);
 
 
