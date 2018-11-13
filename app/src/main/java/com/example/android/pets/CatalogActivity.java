@@ -3,7 +3,6 @@ package com.example.android.pets;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,15 +14,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.pets.data.PetContract.PetEntry;
-import com.example.android.pets.data.PetDbHelper;
-import com.example.android.pets.data.PetProvider;
+
+//import com.example.android.pets.data.PetDbHelper; --no longer used
 
 /**
  * Displays list of pets that were entered and stored in the app.
  */
 public class CatalogActivity extends AppCompatActivity {
 
-    private PetDbHelper mDbHelper;
+    //PetDbHelper is no longer used
+    //private PetDbHelper mDbHelper;
 
 
     @Override
@@ -42,7 +42,7 @@ public class CatalogActivity extends AppCompatActivity {
         });
 
 
-        mDbHelper = new PetDbHelper(this);
+        //mDbHelper = new PetDbHelper(this);  --no longer used
 
         // Create and/or open a database to read from it
         //SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -50,7 +50,7 @@ public class CatalogActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         displayDatabaseInfo();
     }
@@ -129,7 +129,6 @@ public class CatalogActivity extends AppCompatActivity {
             }
 
 
-
         } finally {
             // Always close the cursor when you're done reading from it. This releases all its
             // resources and makes it invalid.
@@ -137,8 +136,8 @@ public class CatalogActivity extends AppCompatActivity {
         }
     }
 
-    private void insertPet(){
-        //SQLiteDatabase db = mDbHelper.getWritableDatabase();
+    private void insertPet() {
+        //SQLiteDatabase db = mDbHelper.getWritableDatabase(); - no longer referenced directly
         ContentValues petValues = new ContentValues();
 
         petValues.put(PetEntry.COLUMN_NAME, "Toto");

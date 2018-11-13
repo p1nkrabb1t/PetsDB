@@ -3,16 +3,11 @@ package com.example.android.pets.data;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import java.net.URI;
-
 /**
  * Created by Ha3el on 15/08/2018.
  */
 
 public final class PetContract {
-
-    //private empty method to prevent anyone creating an instance of it
-    private PetContract() {}
 
     /**
      * The "Content authority" is a name for the entire content provider, similar to the
@@ -21,13 +16,11 @@ public final class PetContract {
      * device.
      */
     public static final String CONTENT_AUTHORITY = "com.example.android.pets";
-
     /**
      * Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
      * the content provider.
      */
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-
     /**
      * Possible path (appended to base content URI for possible URI's)
      * For instance, content://com.example.android.pets/pets/ is a valid path for
@@ -35,6 +28,10 @@ public final class PetContract {
      * as the ContentProvider hasn't been given any information on what to do with "staff".
      */
     public static final String PATH_PETS = "pets";
+
+    //private empty method to prevent anyone creating an instance of it
+    private PetContract() {
+    }
 
     //inner class to represent the pets table and its' columns
     public static abstract class PetEntry implements BaseColumns {

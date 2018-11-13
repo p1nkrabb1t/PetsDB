@@ -3,6 +3,7 @@ package com.example.android.pets.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.example.android.pets.data.PetContract.PetEntry;
 
 /**
@@ -15,7 +16,7 @@ public class PetDbHelper extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 1;
 
-    public PetDbHelper(Context context){
+    public PetDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
