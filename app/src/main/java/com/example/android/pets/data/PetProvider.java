@@ -121,6 +121,29 @@ public class PetProvider extends ContentProvider {
      */
     private Uri insertPet(Uri uri, ContentValues values) {
 
+        // Check that the name is not null
+        String name = values.getAsString(PetEntry.COLUMN_NAME);
+        if (name == null) {
+            throw new IllegalArgumentException("Pet requires a name");
+        }
+
+        // Check that the gender is valid
+        Integer gender = values.getAsInteger(PetEntry.COLUMN_GENDER);
+        //if (gender == null || gender < 0 || gender > 2) --replace with below
+
+        if (gender == null || !PetEntry.isValidGender(gender)) {
+            throw new IllegalArgumentException("Pet requires a gender");
+        }
+
+        // Check that the weight is more than or equal to 0
+        Integer weight = values.getAsInteger(PetEntry.COLUMN_WEIGHT);
+        //Integer weight = Integer.valueOf(weightString);
+        if (weight != null && weight < 0) {
+            Log.e(LOG_TAG, "Weight entry Failed ");
+            throw new IllegalArgumentException("Weight must be a positive number");
+
+        }
+
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
         long id = database.insert(PetEntry.TABLE_NAME, null, values);
 

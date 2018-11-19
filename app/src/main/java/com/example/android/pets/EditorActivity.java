@@ -120,7 +120,13 @@ public class EditorActivity extends AppCompatActivity {
 
         String nameEntry = mNameEditText.getText().toString().trim();
         String breedEntry = mBreedEditText.getText().toString().trim();
-        int weightEntry = Integer.parseInt(mWeightEditText.getText().toString().trim());
+        int weightEntry;
+        try {
+            weightEntry = Integer.parseInt(mWeightEditText.getText().toString().trim());
+        } catch (NumberFormatException e) {
+            weightEntry = 0;
+
+        }
 
         //old code now not needed, left for info
 //        PetDbHelper mDbHelper = new PetDbHelper(this);
