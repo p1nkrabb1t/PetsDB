@@ -123,7 +123,7 @@ public class PetProvider extends ContentProvider {
 
         // Check that the name is not null
         String name = values.getAsString(PetEntry.COLUMN_NAME);
-        if (name == null) {
+        if (name == null || name.length() == 0) {
             throw new IllegalArgumentException("Pet requires a name");
         }
 
