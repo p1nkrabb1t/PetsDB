@@ -140,7 +140,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         });
     }
 
-    private void insertPet() {
+    private void savePet() {
 
         String nameEntry = mNameEditText.getText().toString().trim();
         String breedEntry = mBreedEditText.getText().toString().trim();
@@ -162,17 +162,35 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         petValues.put(PetEntry.COLUMN_GENDER, mGender);
         petValues.put(PetEntry.COLUMN_WEIGHT, weightEntry);
 
-        //insert pet into petProvider and return the content URI of the new entry
-        Uri newEntry = getContentResolver().insert(PetEntry.CONTENT_URI, petValues);
+
+        if (mCurrentPetUri == null) {
 
 
-        String message;
-        if (newEntry == null) {
-            message = getString(R.string.toast_pet_save_error);
+            //insert pet into petProvider and return the content URI of the new entry
+            Uri newEntry = getContentResolver().insert(PetEntry.CONTENT_URI, petValues);
+
+
+            String message;
+            if (newEntry == null) {
+                message = getString(R.string.toast_pet_save_error);
+            } else {
+                message = getString(R.string.toast_pet_saved);
+            }
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         } else {
-            message = getString(R.string.toast_pet_saved);
+            int rowsUpdated = getContentResolver().update(mCurrentPetUri, petValues, null, null);
+            // Show a toast message depending on whether or not the update was successful.
+            if (rowsUpdated == 0) {
+                // If no rows were affected, then there was an error with the update.
+                Toast.makeText(this, "Pet not updated",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the update was successful and we can display a toast.
+                Toast.makeText(this, "Pet updated",
+                        Toast.LENGTH_SHORT).show();
+            }
+
         }
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -190,7 +208,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-                insertPet();
+                savePet();
                 finish();
                 return true;
             // Respond to a click on the "Delete" menu option
