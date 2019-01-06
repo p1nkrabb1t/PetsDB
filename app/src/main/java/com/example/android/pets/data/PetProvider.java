@@ -136,6 +136,7 @@ public class PetProvider extends ContentProvider {
         //if (gender == null || gender < 0 || gender > 2) --replace with below
 
         if (gender == null || !PetEntry.isValidGender(gender)) {
+            Log.e(LOG_TAG, "gender Failed ");
             throw new IllegalArgumentException("Pet requires a gender");
         }
 

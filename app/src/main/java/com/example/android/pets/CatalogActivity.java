@@ -206,7 +206,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] Projection = new String[]{PetEntry._ID,
                 PetEntry.COLUMN_NAME,
-                PetEntry.COLUMN_BREED};
+                PetEntry.COLUMN_BREED,
+                PetEntry.COLUMN_WEIGHT,
+                PetEntry.COLUMN_GENDER};
         return new CursorLoader(this, PetEntry.CONTENT_URI, Projection, null, null, null);
     }
 
