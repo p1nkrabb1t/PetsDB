@@ -149,7 +149,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             weightEntry = Integer.parseInt(mWeightEditText.getText().toString().trim());
         } catch (NumberFormatException e) {
             weightEntry = 0;
+        }
 
+//        //ALTERNATIVE OPTION INFO ONLY:
+//        String weight = mWeightEditText.getText().toString().trim();
+//        int weightEntry = 0;
+//        if (!TextUtils.isEmpty(weight)) {
+//            weightEntry = Integer.parseInt(weight);
+//        }
+
+        if (TextUtils.isEmpty(nameEntry)) {
+            Toast.makeText(this, "input data", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         //old code now not needed, left for info
