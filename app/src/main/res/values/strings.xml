@@ -92,5 +92,11 @@
 
     <!-- Dialog button text for the option to cancel deletion of the current pet [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
+    <string name="breed_unknown">Breed Unknown</string>
+    <string name="input_required">Input required</string>
+    <string name="update_fail">Pet not updated</string>
+    <string name="update_pass">Pet updated</string>
+    <string name="delete_fail">Pet not deleted</string>
+    <string name="delete_pass">Pet deleted</string>
 
 </resources>

@@ -182,7 +182,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 //        }
 
         if (TextUtils.isEmpty(nameEntry)) {
-            Toast.makeText(this, "input data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.input_required, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -216,11 +216,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Show a toast message depending on whether or not the update was successful.
             if (rowsUpdated == 0) {
                 // If no rows were affected, then there was an error with the update.
-                Toast.makeText(this, "Pet not updated",
+                Toast.makeText(this, R.string.update_fail,
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, "Pet updated",
+                Toast.makeText(this, R.string.update_pass,
                         Toast.LENGTH_SHORT).show();
             }
 
@@ -370,11 +370,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Show a toast message depending on whether or not the update was successful.
             if (rowsDeleted == 0) {
                 // If no rows were affected, then there was an error with the update.
-                Toast.makeText(this, "Pet not deleted",
+                Toast.makeText(this, R.string.delete_fail,
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, "Pet deleted",
+                Toast.makeText(this, R.string.delete_pass,
                         Toast.LENGTH_SHORT).show();
             }
             finish();
